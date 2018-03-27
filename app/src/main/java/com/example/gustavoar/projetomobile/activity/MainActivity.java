@@ -29,13 +29,10 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem item = menu.findItem(R.id.action_buscar);
         SearchView searchView = (SearchView) item.getActionView();
-        // Listener que espera a ação de buscar
         searchView.setOnQueryTextListener(onSearch());
 
-        // Recuperar  botão de compartilhar
         MenuItem shareItem = menu.findItem(R.id.action_share);
         ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        //Listener que espera a ação de compartilhar
         share.setShareIntent(getDefautIntent());
         return true;
     }
