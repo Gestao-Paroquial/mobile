@@ -9,6 +9,9 @@ import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +24,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    }
+        ListView lista = findViewById(R.id.Lista);
+
+        lista.setAdapter(new SimplesAdapter(MainActivity.this));
+
+        lista.setOnItemClickListener(new ListView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(MainActivity.this,"clicou!!!",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,Integer.toString(position),Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+   }
 
 
     @Override
@@ -109,8 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 textoRetorno.append("\n");
                 textoRetorno.append(data.getStringExtra("telefoneMembro"));
 
-                TextView texto = (TextView) findViewById(R.id.textoInicial);
-                texto.setText(textoRetorno.toString());
+
 
             }
         }

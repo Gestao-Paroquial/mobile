@@ -71,8 +71,6 @@ public class CadastroActivity extends AppCompatActivity {
                 textoRetorno.append("\n");
                 textoRetorno.append(data.getStringExtra("telefoneMembro"));
 
-                TextView texto = (TextView) findViewById(R.id.textoInicial);
-                texto.setText(textoRetorno.toString());
 
             }
         }
