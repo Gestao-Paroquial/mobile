@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\ocimar\AndroidStudioProjects\mobile\ProjetoMobile.iml" filepath="C:\Users\ocimar\AndroidStudioProjects\mobile\ProjetoMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile.iml" filepath="$PROJECT_DIR$/mobile.iml" />
-      <module fileurl="file://C:\Users\ocimar\AndroidStudioProjects\mobile\mobile.iml" filepath="C:\Users\ocimar\AndroidStudioProjects\mobile\mobile.iml" />
     </modules>
   </component>
 </project>

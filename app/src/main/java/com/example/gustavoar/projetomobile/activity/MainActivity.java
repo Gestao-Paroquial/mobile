@@ -1,5 +1,6 @@
 package com.example.gustavoar.projetomobile.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -16,8 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gustavoar.projetomobile.R;
+import com.example.gustavoar.projetomobile.model.MensagemParoco;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    List<MensagemParoco> mensagemParocos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +33,42 @@ public class MainActivity extends AppCompatActivity {
 
         ListView lista = findViewById(R.id.Lista);
 
-        lista.setAdapter(new SimplesAdapter(MainActivity.this));
 
-        lista.setOnItemClickListener(new ListView.OnItemClickListener(){
+        prepararMensagens();
+
+        lista.setAdapter(new SimplesAdapter(MainActivity.this, mensagemParocos));
+
+        lista.setOnItemClickListener(new ListView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(MainActivity.this,"clicou!!!",Toast.LENGTH_LONG).show();
-                Toast.makeText(MainActivity.this,Integer.toString(position),Toast.LENGTH_LONG).show();
 
+                MensagemParoco msg = mensagemParocos.get(position);
+
+                Intent detailIt = new Intent(MainActivity.this, DetalheActivity.class);
+                detailIt.putExtra("titulo", msg.getTitulo());
+                detailIt.putExtra("subtitulo", msg.getSubtitulo());
+                detailIt.putExtra("mensagem", msg.getMensagem());
+
+                startActivity(detailIt);
             }
         });
 
-   }
+    }
+
+    public void prepararMensagens() {
+
+
+        for (int i = 1; i < 11; i++) {
+            MensagemParoco msg = new MensagemParoco();
+            msg.setMensagem("Mensagem " + i);
+            msg.setTitulo("Título " + i);
+            msg.setSubtitulo("Subtítulo " + i);
+
+            mensagemParocos.add(msg);
+        }
+    }
 
 
     @Override
@@ -120,12 +150,19 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 StringBuffer textoRetorno = new StringBuffer();
-                textoRetorno.append(data.getStringExtra("nomeMembro"));
-                textoRetorno.append("\n");
-                textoRetorno.append(data.getStringExtra("emailMembro"));
-                textoRetorno.append("\n");
-                textoRetorno.append(data.getStringExtra("telefoneMembro"));
+                MensagemParoco mensagemParoco = new MensagemParoco();
 
+                mensagemParoco.setTitulo(data.getStringExtra("titulo"));
+                mensagemParoco.setSubtitulo(data.getStringExtra("subtitulo"));
+                mensagemParoco.setMensagem(data.getStringExtra("mensagem"));
+
+
+                ListView lista = findViewById(R.id.Lista);
+
+
+                mensagemParocos.add(mensagemParoco);
+
+                lista.setAdapter(new SimplesAdapter(MainActivity.this, mensagemParocos));
 
 
             }

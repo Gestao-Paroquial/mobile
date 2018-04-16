@@ -4,58 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CadastroActivity"
+    tools:context=".activity.DetalheActivity"
     android:orientation="vertical"
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView432"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
-        android:text="Título" />
+        android:text="Título:" />
 
-    <EditText
-        android:id="@+id/titulo"
+    <TextView
+        android:id="@+id/tituloDetalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/teste"
+        android:id="@+id/teste3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
-        android:text="Subtítulo" />
+        android:text="Subtítulo:" />
 
-    <EditText
-        android:id="@+id/subtitulo"
+    <TextView
+        android:id="@+id/subtituloDetalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView44"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
-        android:text="Mensagem" />
+        android:text="Mensagem:" />
 
-    <EditText
-        android:id="@+id/mensagem"
+    <TextView
+        android:id="@+id/mensagemDetalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/botaoCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salvar" />
 </LinearLayout>

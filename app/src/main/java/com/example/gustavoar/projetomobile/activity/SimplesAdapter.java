@@ -6,30 +6,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.gustavoar.projetomobile.model.MensagemParoco;
+
+import java.util.List;
+
 /**
  * Created by ocimar on 09/04/2018.
  */
 
 public class SimplesAdapter extends BaseAdapter {
 
-    public String [] listaCervejas = new String[]{
-      "Paulaner", "duvel", "Sierra Nevada"
-    };
+    private List<MensagemParoco> mensagensParoco;
 
     Context contexto;
 
-    public SimplesAdapter(Context contexto){
+    public SimplesAdapter(Context contexto, List<MensagemParoco> mensagemParocos){
+
         this.contexto = contexto;
+        this.mensagensParoco = mensagemParocos;
     }
 
     @Override
     public int getCount() {
-        return listaCervejas.length;
+        return mensagensParoco.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listaCervejas[position];
+        return mensagensParoco.get(position);
     }
 
     @Override
@@ -40,11 +44,11 @@ public class SimplesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        String cerveja = listaCervejas[position];
+        MensagemParoco msgParoco = mensagensParoco.get(position);
 
         TextView t = new TextView(contexto);
 
-        t.setText(cerveja);
+        t.setText(msgParoco.getTitulo());
 
         return t;
     }
