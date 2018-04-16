@@ -19,6 +19,15 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.CadastroActivity" />
         <activity android:name=".activity.DetalheActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDmL9N_sb0Fb7e7_fb8pPB6_o0KbzGQiIQ" />
+
+        <activity
+            android:name=".activity.LocalizacaoActivity"
+            android:label="Mapa" />
+
     </application>
 
 </manifest>

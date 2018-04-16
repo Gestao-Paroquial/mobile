@@ -14,6 +14,9 @@
         android:icon="@drawable/ic_adicionar_black"
         android:title="@string/action_adicionar"
         app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_map"
+        android:title="Localização"
+        app:showAsAction="never" />
     <item android:id="@+id/action_config"
         android:title="@string/action_config"
         app:showAsAction="never" />

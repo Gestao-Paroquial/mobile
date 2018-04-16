@@ -118,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
                     "Sair",
                     Toast.LENGTH_SHORT).show();
             clickSair();
+        } else if (id == R.id.action_map){
+            Intent it = new Intent(MainActivity.this, LocalizacaoActivity.class);
+            startActivity(it);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
