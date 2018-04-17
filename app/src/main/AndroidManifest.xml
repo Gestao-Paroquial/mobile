@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.CadastroActivity" />
-        <activity android:name=".activity.DetalheActivity"></activity>
+        <activity android:name=".activity.DetalheActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -27,7 +27,11 @@
         <activity
             android:name=".activity.LocalizacaoActivity"
             android:label="Mapa" />
-
+        <activity android:name=".activity.ConfiguracoesActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".activity.MainActivity" ></meta-data>
+        </activity>
     </application>
 
 </manifest>

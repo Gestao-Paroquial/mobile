@@ -106,9 +106,7 @@ public class MainActivity extends AppCompatActivity {
             Intent it = new Intent(MainActivity.this, CadastroActivity.class);
             startActivityForResult(it, 1);
         } else if (id == R.id.action_config) {
-            Toast.makeText(MainActivity.this,
-                    "Config",
-                    Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this,ConfiguracoesActivity.class));
         } else if (id == R.id.action_share) {
             Toast.makeText(MainActivity.this,
                     "Compartilhar",

@@ -55,6 +55,10 @@ public class LoginActivity extends AppCompatActivity {
             Prefs.setString(LoginActivity.this, "usuario",txtUsuario);
             Prefs.setString(LoginActivity.this, "senha",txtSenha);
             Prefs.setBoolean(LoginActivity.this,"lembrarUsuario",guardarSenha.isChecked());
+        }else{
+            Prefs.setString(LoginActivity.this, "usuario","");
+            Prefs.setString(LoginActivity.this, "senha","");
+            Prefs.setBoolean(LoginActivity.this,"lembrarUsuario",false);
         }
         startActivity(new Intent(this, MainActivity.class));
         finish();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="App paróquia">
+
+        <CheckBoxPreference
+            android:key="PREF_CHECK_PUSH"
+            android:title="Notificações">
+
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="PREF_CHECK_RECADO"
+            android:title="Recados">
+
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
