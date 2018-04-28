@@ -1,5 +1,6 @@
 package com.example.gustavoar.projetomobile.activity;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -13,11 +14,15 @@ public class ParoquiaDB extends SQLiteOpenHelper {
     // Versao do BD
     public static final int VERSAO_BANCO = 1;
 
+    public ParoquiaDB(Context context){
+        super(context, NOME_BANCO, null, VERSAO_BANCO);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table if not exists mensagemParoco (" +
                 "_id integer primary key autoincrement, " +
-                "titulo text, subtitulo text, mensagem text);");
+                "titulo text, subTitulo text, mensagem text);");
     }
 
     @Override
