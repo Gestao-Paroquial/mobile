@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public class MensagemParoco implements Serializable{
 
+    public long id;
     private String titulo;
     private String subtitulo;
     private String mensagem;
@@ -16,6 +17,14 @@ public class MensagemParoco implements Serializable{
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.mensagem = mensagem;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMensagem() {

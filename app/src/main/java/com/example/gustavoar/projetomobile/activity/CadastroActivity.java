@@ -41,7 +41,13 @@ public class CadastroActivity extends AppCompatActivity {
                 msg.setSubtitulo(subtitulo.getText().toString());
                 msg.setMensagem(mensagem.getText().toString());
 
+                ParoquiaDB paroquiaDB = new ParoquiaDB(CadastroActivity.this);
+
+                paroquiaDB.save(msg);
+
                 Intent returnIntent = new Intent();
+
+                returnIntent.putExtra("msg",msg);
                 returnIntent.putExtra("titulo", msg.getTitulo());
                 returnIntent.putExtra("subtitulo", msg.getSubtitulo());
                 returnIntent.putExtra("mensagem", msg.getMensagem());

@@ -59,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void prepararMensagens() {
 
+        // Criar objeto de ParoquiaDB
+        ParoquiaDB paroquiaDB = new ParoquiaDB(MainActivity.this);
+        // Procurar mensagens e armazena navariavel de classe mensagemParocos
+        mensagemParocos = paroquiaDB.findAll();
 
+        /*
         for (int i = 1; i < 11; i++) {
             MensagemParoco msg = new MensagemParoco();
             msg.setMensagem("Mensagem " + i);
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             mensagemParocos.add(msg);
         }
+        */
     }
 
 
