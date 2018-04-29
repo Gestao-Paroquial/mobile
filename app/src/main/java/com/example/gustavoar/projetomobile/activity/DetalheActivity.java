@@ -9,13 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gustavoar.projetomobile.R;
 import com.example.gustavoar.projetomobile.model.MensagemParoco;
 
 public class DetalheActivity extends AppCompatActivity {
 
-    TextView id;
+    MensagemParoco msg;
     TextView tituloDetalhe;
     TextView mensagemDetalhe;
     TextView subtituloDetalhe;
@@ -25,21 +26,28 @@ public class DetalheActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhe);
 
-        id = findViewById(R.id.id);
-        id.setText(getIntent().getStringExtra("id"));
+        msg = new MensagemParoco();
+
+        Intent i = getIntent();
+
+        msg = (MensagemParoco) i.getSerializableExtra("mensagem");
 
         tituloDetalhe = findViewById(R.id.tituloDetalhe);
-        tituloDetalhe.setText(getIntent().getStringExtra("titulo"));
+        tituloDetalhe.setText(msg.getTitulo());
 
         mensagemDetalhe = findViewById(R.id.mensagemDetalhe);
-        mensagemDetalhe.setText(getIntent().getStringExtra("mensagem"));
+        mensagemDetalhe.setText(msg.getMensagem());
 
         subtituloDetalhe = findViewById(R.id.subtituloDetalhe);
-        subtituloDetalhe.setText(getIntent().getStringExtra("subtitulo"));
+        subtituloDetalhe.setText(msg.getSubtitulo());
 
         Button btnAlterar = (Button) findViewById(R.id.botaoAlterar);
 
         Button btnExcluir = (Button) findViewById(R.id.botaoExcluir);
+
+        btnAlterar.setOnClickListener(clickAlterar());
+
+        btnExcluir.setOnClickListener(clickExcluir());
 
     }
 
@@ -50,12 +58,23 @@ public class DetalheActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DetalheActivity.this, CadastroActivity.class);
 
-                intent.putExtra("id", id.getText());
-                intent.putExtra("titulo", tituloDetalhe.getText());
-                intent.putExtra("subtitulo", subtituloDetalhe.getText());
-                intent.putExtra("mensagem", mensagemDetalhe.getText());
+                intent.putExtra("mensagem", msg);
 
                 startActivity(intent);
+                finish();
+            }
+        };
+    }
+
+    public View.OnClickListener clickExcluir() {
+        return new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                ParoquiaDB paroquiaDB = new ParoquiaDB(DetalheActivity.this);
+                paroquiaDB.delete(msg);
+                Intent returnIntent = new Intent(DetalheActivity.this,MainActivity.class);
+                startActivity(returnIntent);
                 finish();
             }
         };

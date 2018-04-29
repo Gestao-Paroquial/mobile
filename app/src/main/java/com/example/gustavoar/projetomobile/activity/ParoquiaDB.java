@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.gustavoar.projetomobile.model.MensagemParoco;
 
@@ -39,7 +40,7 @@ public class ParoquiaDB extends SQLiteOpenHelper {
 
     // inserir uma nova mensagem ou atualizar existente
     public long save(MensagemParoco msg) {
-        long id = msg.id;
+        long id = msg.getId();
         SQLiteDatabase db = getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
@@ -77,10 +78,13 @@ public class ParoquiaDB extends SQLiteOpenHelper {
 
     // retornar todas as cervejas
     public List<MensagemParoco> findAll() {
+
         SQLiteDatabase db =  getWritableDatabase();
         try {
             // criar select * from mensagemParoco
+
             Cursor c = db.query("mensagemParoco", null, null, null, null, null, null, null);
+
             return  toList(c);
         } finally {
             db.close();
@@ -95,9 +99,9 @@ public class ParoquiaDB extends SQLiteOpenHelper {
                 MensagemParoco mensagemParoco = new MensagemParoco();
                 mensagens.add(mensagemParoco);
                 mensagemParoco.setId(c.getLong(c.getColumnIndex("_id")));
-                mensagemParoco.setTitulo(c.getString(c.getColumnIndex("nome")));
-                mensagemParoco.setSubtitulo(c.getString(c.getColumnIndex("imagem")));
-                mensagemParoco.setMensagem(c.getString(c.getColumnIndex("tipo")));
+                mensagemParoco.setTitulo(c.getString(c.getColumnIndex("titulo")));
+                mensagemParoco.setSubtitulo(c.getString(c.getColumnIndex("subTitulo")));
+                mensagemParoco.setMensagem(c.getString(c.getColumnIndex("mensagem")));
 
             } while (c.moveToNext());
         }

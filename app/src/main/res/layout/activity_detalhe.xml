@@ -9,21 +9,6 @@
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/textView433"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="ID:" />
-
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
         android:id="@+id/textView432"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

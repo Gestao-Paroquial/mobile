@@ -12,17 +12,13 @@ import com.example.gustavoar.projetomobile.model.MensagemParoco;
 
 import java.util.List;
 
-/**
- * Created by ocimar on 09/04/2018.
- */
-
-public class SimplesAdapter extends BaseAdapter {
+public class MensagemAdapter  extends BaseAdapter {
 
     private List<MensagemParoco> mensagensParoco;
 
     Context contexto;
 
-    public SimplesAdapter(Context contexto, List<MensagemParoco> mensagemParocos){
+    public MensagemAdapter(Context contexto, List<MensagemParoco> mensagemParocos){
 
         this.contexto = contexto;
         this.mensagensParoco = mensagemParocos;
@@ -46,13 +42,13 @@ public class SimplesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        MensagemParoco msgParoco = mensagensParoco.get(position);
-
-        View viewText = LayoutInflater.from(contexto).inflate(R.layout.tela_inicial_itens,parent,false);
-
-        TextView t = (TextView) viewText.findViewById(R.id.textItemList);
-
-        t.setText(msgParoco.getId() + "-" + msgParoco.getTitulo());
+        // Infla a View
+        View viewText = LayoutInflater.from(contexto)
+                .inflate(R.layout.tela_inicial_itens, parent, false);
+        // Procura elementos de tela para atualizar
+        TextView t = (TextView)viewText.findViewById(R.id.textItemList);
+        MensagemParoco msg = mensagensParoco.get(position);
+        t.setText(msg.getId() + " - " + msg.getTitulo());
 
         return viewText;
     }

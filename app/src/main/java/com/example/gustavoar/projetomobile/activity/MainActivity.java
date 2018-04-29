@@ -7,6 +7,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,18 +26,23 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     List<MensagemParoco> mensagemParocos = new ArrayList<>();
+    ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView lista = findViewById(R.id.Lista);
+        lista = (ListView) findViewById(R.id.Lista);
 
+        // Criar objeto de paroquiaDB
+        ParoquiaDB paroquiaDB = new ParoquiaDB(MainActivity.this);
+        // Procurar mensagens e armazenar na
+        // variavel de classe mensagens
+        mensagemParocos = paroquiaDB.findAll();
 
-        prepararMensagens();
-
-        lista.setAdapter(new SimplesAdapter(MainActivity.this, mensagemParocos));
+        // Adapater de mensagens
+        lista.setAdapter(new MensagemAdapter(MainActivity.this, mensagemParocos));
 
         lista.setOnItemClickListener(new ListView.OnItemClickListener() {
 
@@ -47,36 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 MensagemParoco msg = mensagemParocos.get(position);
 
                 Intent detailIt = new Intent(MainActivity.this, DetalheActivity.class);
-                detailIt.putExtra("id", msg.getId());
-                detailIt.putExtra("titulo", msg.getTitulo());
-                detailIt.putExtra("subtitulo", msg.getSubtitulo());
-                detailIt.putExtra("mensagem", msg.getMensagem());
+
+                detailIt.putExtra("mensagem", msg);
 
                 startActivity(detailIt);
+                finish();
             }
         });
 
     }
-
-    public void prepararMensagens() {
-
-        // Criar objeto de ParoquiaDB
-        ParoquiaDB paroquiaDB = new ParoquiaDB(MainActivity.this);
-        // Procurar mensagens e armazena navariavel de classe mensagemParocos
-        mensagemParocos = paroquiaDB.findAll();
-
-        /*
-        for (int i = 1; i < 11; i++) {
-            MensagemParoco msg = new MensagemParoco();
-            msg.setMensagem("Mensagem " + i);
-            msg.setTitulo("Título " + i);
-            msg.setSubtitulo("Subtítulo " + i);
-
-            mensagemParocos.add(msg);
-        }
-        */
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,26 +140,11 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-
-            if (resultCode == RESULT_OK) {
-                StringBuffer textoRetorno = new StringBuffer();
-                MensagemParoco mensagemParoco = new MensagemParoco();
-
-                mensagemParoco.setTitulo(data.getStringExtra("titulo"));
-                mensagemParoco.setSubtitulo(data.getStringExtra("subtitulo"));
-                mensagemParoco.setMensagem(data.getStringExtra("mensagem"));
-
-
-                ListView lista = findViewById(R.id.Lista);
-
-
-                mensagemParocos.add(mensagemParoco);
+                // Criar objeto de ParoquiaDB
+                ParoquiaDB paroquiaDB = new ParoquiaDB(MainActivity.this);
+                // Procurar mensagens e armazena navariavel de classe mensagemParocos
+                mensagemParocos = paroquiaDB.findAll();
 
                 lista.setAdapter(new SimplesAdapter(MainActivity.this, mensagemParocos));
-
-
-            }
-        }
     }
 }

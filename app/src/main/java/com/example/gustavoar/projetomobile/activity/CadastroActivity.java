@@ -4,16 +4,26 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.gustavoar.projetomobile.R;
 import com.example.gustavoar.projetomobile.model.MensagemParoco;
 
 public class CadastroActivity extends AppCompatActivity {
+
+    private MensagemParoco mensagemParoco;
+    EditText titulo;
+    EditText subTitulo;
+    EditText mensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +32,24 @@ public class CadastroActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mensagemParoco = new MensagemParoco();
+        titulo = (EditText) findViewById(R.id.titulo);
+        subTitulo = (EditText) findViewById(R.id.subtitulo);
+        mensagem = (EditText) findViewById(R.id.mensagem);
 
+        Intent i = getIntent();
 
-        Button botao = (Button) findViewById(R.id.botaoCadastro);
-        botao.setOnClickListener(clickCadastro());
+        mensagemParoco = (MensagemParoco) i.getSerializableExtra("mensagem");
+
+        if(mensagemParoco != null) {
+            titulo.setText(mensagemParoco.getTitulo());
+            subTitulo.setText(mensagemParoco.getSubtitulo());
+            mensagem.setText(mensagemParoco.getMensagem());
+        }
+
+        Button btnSalvar = (Button) findViewById(R.id.botaoCadastro);
+
+        btnSalvar.setOnClickListener(clickCadastro());
     }
 
     public View.OnClickListener clickCadastro() {
@@ -33,42 +57,23 @@ public class CadastroActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                EditText id = (EditText) findViewById(R.id.id);
-                id.setFocusable(false);
-                id.setEnabled(false);
-                id.setCursorVisible(false);
-                EditText titulo = (EditText) findViewById(R.id.titulo);
-                EditText subtitulo = (EditText) findViewById(R.id.subtitulo);
-                EditText mensagem = (EditText) findViewById(R.id.mensagem);
 
-                id.setText(getIntent().getStringExtra("id"));
-                titulo.setText(getIntent().getStringExtra("titulo"));
-                subtitulo.setText(getIntent().getStringExtra("subTitulo"));
-                mensagem.setText(getIntent().getStringExtra("mensagem"));
-
-                MensagemParoco msg = new MensagemParoco();
-
-                if(id.getText().toString() != "" )
-                    msg.setId(Integer.parseInt(id.getText().toString()));
-
-                msg.setTitulo(titulo.getText().toString());
-                msg.setSubtitulo(subtitulo.getText().toString());
-                msg.setMensagem(mensagem.getText().toString());
+                if(mensagemParoco == null)
+                    mensagemParoco = new MensagemParoco();
+                mensagemParoco.setTitulo(titulo.getText().toString());
+                mensagemParoco.setSubtitulo(subTitulo.getText().toString());
+                mensagemParoco.setMensagem(mensagem.getText().toString());
 
                 ParoquiaDB paroquiaDB = new ParoquiaDB(CadastroActivity.this);
 
-                paroquiaDB.save(msg);
+                paroquiaDB.save(mensagemParoco);
 
-                Intent returnIntent = new Intent();
+                Intent returnIntent = new Intent(CadastroActivity.this,MainActivity.class);
 
-                returnIntent.putExtra("msg",msg);
-                returnIntent.putExtra("titulo", msg.getTitulo());
-                returnIntent.putExtra("subtitulo", msg.getSubtitulo());
-                returnIntent.putExtra("mensagem", msg.getMensagem());
+                startActivity(returnIntent);
 
-
-                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
+
             }
         };
     }
@@ -77,28 +82,14 @@ public class CadastroActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+
+            Intent it = new Intent(CadastroActivity.this, MainActivity.class);
+            startActivity(it);
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-
-            if (resultCode == RESULT_OK) {
-                StringBuffer textoRetorno = new StringBuffer();
-                textoRetorno.append(data.getStringExtra("id"));
-                textoRetorno.append("\n");
-                textoRetorno.append(data.getStringExtra("titulo"));
-                textoRetorno.append("\n");
-                textoRetorno.append(data.getStringExtra("subtitulo"));
-                textoRetorno.append("\n");
-                textoRetorno.append(data.getStringExtra("mensagem"));
-
-
-            }
-        }
-    }
 }
