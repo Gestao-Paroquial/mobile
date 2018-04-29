@@ -22,6 +22,8 @@ public class CadastroActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         Button botao = (Button) findViewById(R.id.botaoCadastro);
         botao.setOnClickListener(clickCadastro());
     }
@@ -38,6 +40,11 @@ public class CadastroActivity extends AppCompatActivity {
                 EditText titulo = (EditText) findViewById(R.id.titulo);
                 EditText subtitulo = (EditText) findViewById(R.id.subtitulo);
                 EditText mensagem = (EditText) findViewById(R.id.mensagem);
+
+                id.setText(getIntent().getStringExtra("id"));
+                titulo.setText(getIntent().getStringExtra("titulo"));
+                subtitulo.setText(getIntent().getStringExtra("subTitulo"));
+                mensagem.setText(getIntent().getStringExtra("mensagem"));
 
                 MensagemParoco msg = new MensagemParoco();
 
@@ -82,6 +89,8 @@ public class CadastroActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 StringBuffer textoRetorno = new StringBuffer();
+                textoRetorno.append(data.getStringExtra("id"));
+                textoRetorno.append("\n");
                 textoRetorno.append(data.getStringExtra("titulo"));
                 textoRetorno.append("\n");
                 textoRetorno.append(data.getStringExtra("subtitulo"));

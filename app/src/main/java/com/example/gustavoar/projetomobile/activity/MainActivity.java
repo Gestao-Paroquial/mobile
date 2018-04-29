@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 MensagemParoco msg = mensagemParocos.get(position);
 
                 Intent detailIt = new Intent(MainActivity.this, DetalheActivity.class);
+                detailIt.putExtra("id", msg.getId());
                 detailIt.putExtra("titulo", msg.getTitulo());
                 detailIt.putExtra("subtitulo", msg.getSubtitulo());
                 detailIt.putExtra("mensagem", msg.getMensagem());
