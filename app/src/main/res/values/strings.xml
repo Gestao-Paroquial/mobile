@@ -6,4 +6,5 @@
     <string name="action_adicionar">Adicionar</string>
     <string name="action_config">Configurações</string>
     <string name="action_share">Compartilhar</string>
+    <string name="title_activity_alterar_cadastro">AlterarCadastro</string>
 </resources>

@@ -31,11 +31,18 @@ public class CadastroActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                EditText id = (EditText) findViewById(R.id.id);
+                id.setFocusable(false);
+                id.setEnabled(false);
+                id.setCursorVisible(false);
                 EditText titulo = (EditText) findViewById(R.id.titulo);
                 EditText subtitulo = (EditText) findViewById(R.id.subtitulo);
                 EditText mensagem = (EditText) findViewById(R.id.mensagem);
 
                 MensagemParoco msg = new MensagemParoco();
+
+                if(id.getText().toString() != "" )
+                    msg.setId(Integer.parseInt(id.getText().toString()));
 
                 msg.setTitulo(titulo.getText().toString());
                 msg.setSubtitulo(subtitulo.getText().toString());

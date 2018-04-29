@@ -27,10 +27,12 @@
         <activity
             android:name=".activity.LocalizacaoActivity"
             android:label="Mapa" />
-        <activity android:name=".activity.ConfiguracoesActivity"
+        <activity
+            android:name=".activity.ConfiguracoesActivity"
             android:parentActivityName=".activity.MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".activity.MainActivity" ></meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
         </activity>
     </application>
 
